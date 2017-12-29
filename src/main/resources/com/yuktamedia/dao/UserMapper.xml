@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuktamedia.dao.UserMapper" >
+    <resultMap id="userResult" type="com.yuktamedia.model.User">
+        <id property="id" column="id" />
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="displayName" column="display_name"/>
+        <result property="role" column="role"/>
+        <result property="active" column="status"/>
+        <result property="domain" column="domain"/>
+    </resultMap>
+    <select id="getAll" resultType="com.yuktamedia.model.User" resultMap="userResult">
+        SELECT id, email, display_name, password, role, status, domain from user
+    </select>
+    <select id="findByEmail" resultType="com.yuktamedia.model.User" parameterType="String" resultMap="userResult">
+        SELECT id, email, display_name, password, role, status, domain from user WHERE email = #{email}
+    </select>
+    <update id="updatePassword" parameterType="String">
+        UPDATE user SET password = #{password} from  WHERE email = #{email}
+    </update>
+    <update id="updateDisplayName" parameterType="String">
+        UPDATE user SET display_name = #{displayName} from  WHERE email = #{email}
+    </update>
+    <update id="updateStatus" parameterType="String">
+        UPDATE user SET status = #{status} from  WHERE email = #{email}
+    </update>
+    <insert id="save" parameterType="com.yuktamedia.model.User"  keyProperty="id" useGeneratedKeys="true">
+        INSERT into user(email, display_name, password, role, status, domain) VALUES(#{email}, #{displayName}, #{password}, #{role}, #{status}, #{domain})
+    </insert>
+</mapper>

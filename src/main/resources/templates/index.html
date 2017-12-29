@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:s="http://thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"></meta>
+        <title>Spring First Test</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="css/app.css" rel="stylesheet"/>
+    </head>
+    <body ng-app="productApp">
+        <div class="row" ng-controller="productController" ng-init="initialize()">
+            <div class="col-5">
+                <form name="NewProductForm">
+                    <label class="col-lg-4">ID *</label>
+                    <input type="text" name="id" ng-model="newProduct.id" required="true" class="col-lg-6" />
+                    <br />
+                    <br />
+                    <label class="col-lg-4">Name *</label>
+                    <input type="text" name="name" ng-model="newProduct.name" required="true" class="col-lg-6"/>
+                    <br/>
+                    <br/>
+                    <label class="col-lg-4">Product Type</label>
+                    <input type="color" name="color" ng-model="newProduct.color" class="col-lg-6"/>
+                    <br />
+                    <br />
+                    <label class="col-lg-4">Product URL</label>
+                    <input type="text" name="image" ng-model="newProduct.image" class="col-lg-6" />
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <input type="button" value="Save" ng-click="saveProduct()" class="btn btn-primary" />
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="button" value="Clear" ng-click="newProduct = {}" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5">
+                <form name="EditProductForm" ng-show="editProduct.id">
+                    <label class="col-lg-4">ID</label>
+                    <input type="text" name="id" ng-model="editProduct.id" disabled="disabled" class="col-lg-6" />
+                    <br />
+                    <br />
+                    <label class="col-lg-4">Name</label>
+                    <input type="text" name="name" ng-model="editProduct.name" class="col-lg-6"/>
+                    <br/>
+                    <br/>
+                    <label class="col-lg-4">Product Type</label>
+                    <input type="color" name="color" ng-model="editProduct.color" class="col-lg-6"/>
+                    <br />
+                    <br />
+                    <label class="col-lg-4">Product URL</label>
+                    <input type="text" name="image" ng-model="editProduct.image" class="col-lg-6" />
+                    <br />
+                    <br />
+                    <div class="col-lg-2">
+                        <input type="button" value="Update" ng-click="updateProduct()" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Product Color</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in products">
+                                <td>{{ product.id }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.color }}</td>
+                                <td>{{ product.image }}</td>
+                                <td>
+                                    <a href="javascript:void(0)" ng-click="edit(product.id)">edit</a> | <a href="javascript:void(0)" ng-click="delete(product.id)">delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-3.2.1.slim.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/angular.min.js" ></script>
+        <script src="js/jsrsasign-all-min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>

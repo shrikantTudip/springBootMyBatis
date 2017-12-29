@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuktamedia.dao.SessionMapper" >
+    <resultMap id="roleResult" type="com.yuktamedia.model.Session">
+        <id property="sessionId" column="session_id" />
+        <result property="userId" column="user_id"/>
+    </resultMap>
+    <select id="findAll" resultType="com.yuktamedia.model.Session" resultMap="roleResult">
+        SELECT session_id, user_id from sessions
+    </select>
+    <select id="findByUserId" resultType="com.yuktamedia.model.Session" resultMap="roleResult">
+        SELECT session_id, user_id from sessions where user_id = #{id}
+    </select>
+    <insert id="save" parameterType="com.yuktamedia.model.Session" keyProperty="sessionId" useGeneratedKeys="false">
+        INSERT into sessions (session_id, user_id) VALUES(#{sessionId}, #{userId})
+    </insert>
+    <delete id="deleteById" parameterType="String">
+        DELETE FROM sessions WHERE  session_id = #{sessionId}
+    </delete>
+</mapper>

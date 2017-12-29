@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuktamedia.dao.ProductMapper" >
+	<resultMap id="productResult" type="com.yuktamedia.model.Product">
+		<id property="id" column="id" />
+		<result property="name" column="name"/>
+		<result property="image" column="image"/>
+		<result property="color" column="color"/>
+	</resultMap>
+	<select id="getAll" resultType="com.yuktamedia.model.Product" resultMap="productResult">
+	    SELECT id, name, image, color from Product
+	</select>
+	<select id="getById" resultType="com.yuktamedia.model.Product" parameterType="int" resultMap="productResult">
+	    SELECT id, name, image, color from Product WHERE id = #{id}
+	</select>
+	<insert id="save" parameterType="com.yuktamedia.model.Product"  keyProperty="id" useGeneratedKeys="false">
+		INSERT into Product(id, name, image, color) VALUES(#{id}, #{name}, #{image}, #{color}) 	    
+	</insert>
+	<update id="update" parameterType="com.yuktamedia.model.Product">
+		UPDATE Product SET id=#{id}, name=#{name}, image=#{image}, color=#{color} WHERE id =#{id}  	    
+	</update>
+	<delete id="deleteById" parameterType="int">
+		DELETE FROM Product WHERE id =#{id}  	    
+	</delete>
+</mapper> 
