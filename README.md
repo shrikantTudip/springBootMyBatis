@@ -34,10 +34,10 @@ If running `mvn clean package` would ran into problem check all dependency are r
 
 If app failed to start after running `java -jar target/springbootmybatis-1.0-SNAPSHOT.jar` command check any application already running on 8080 port
 
-##Credits
+## Credits
 
 All the credits for the guys at Yuktamedia for creating the original implementation.
 
-##License
+## License
 
 Mit License: http://www.opensource.org/licenses/mit-license.php
